@@ -1,4 +1,3 @@
-import os
 import json
 import streamlit as st
 import google.generativeai as genai
@@ -8,8 +7,8 @@ import uuid
 # ------------------------
 # Configure API
 # ------------------------
-genai.configure(api_key="YOUR_API_KEY_HERE")
-
+import os
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 # ------------------------
 # File paths
 # ------------------------
