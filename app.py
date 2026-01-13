@@ -20,14 +20,15 @@ COMMENTS_FILE = "comments.json"
 # ------------------------
 # Helpers
 # ------------------------
+# ------------------------
+# Helpers
+# ------------------------
 def load_json(path, default):
-    # create file if missing
     if not os.path.exists(path):
         with open(path, "w") as f:
             json.dump(default, f)
         return default
 
-    # file exists → try loading
     try:
         with open(path, "r") as f:
             content = f.read().strip()
@@ -35,10 +36,16 @@ def load_json(path, default):
                 raise ValueError("Empty JSON file")
             return json.loads(content)
     except (json.JSONDecodeError, ValueError):
-        # file is corrupted or empty → reset it
         with open(path, "w") as f:
             json.dump(default, f)
         return default
+
+
+def save_json(path, data):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(data, f, indent=4)
+    os.replace(tmp, path)
 
 # ------------------------
 # USER AUTH
