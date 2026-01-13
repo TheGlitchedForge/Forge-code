@@ -206,7 +206,7 @@ def search_page():
 
     if st.button("Search"):
         try:
-            model = genai.GenerativeModel("gemini-2.0-flash")
+            model = genai.GenerativeModel("gemini-2.5-flash")
             response = model.generate_content(query)
             st.write(response.text)
         except:
